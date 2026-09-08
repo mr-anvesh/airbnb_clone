@@ -95,17 +95,17 @@ export default function ListingCard({ listing, isWishlisted = false, checkIn, ch
             <>
               <button
                 onClick={prevImg}
-                className={`absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/90 flex items-center justify-center shadow-sm transition-opacity ${imgIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-0 group-hover:opacity-100'}`}
+                className={`absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 flex items-center justify-center shadow-sm transition-opacity ${imgIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100 sm:opacity-0 sm:group-hover:opacity-100'}`}
               >
                 <ChevronLeft size={14} className="text-[#222222]" />
               </button>
               <button
                 onClick={nextImg}
-                className={`absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/90 flex items-center justify-center shadow-sm transition-opacity ${imgIndex === images.length - 1 ? 'opacity-0 pointer-events-none' : 'opacity-0 group-hover:opacity-100'}`}
+                className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 flex items-center justify-center shadow-sm transition-opacity ${imgIndex === images.length - 1 ? 'opacity-0 pointer-events-none' : 'opacity-100 sm:opacity-0 sm:group-hover:opacity-100'}`}
               >
                 <ChevronRight size={14} className="text-[#222222]" />
               </button>
-              <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                 {images.map((_, i) => (
                   <div key={i} className={`rounded-full transition-all ${i === imgIndex ? 'w-1.5 h-1.5 bg-white' : 'w-1 h-1 bg-white/60'}`} />
                 ))}
@@ -123,7 +123,7 @@ export default function ListingCard({ listing, isWishlisted = false, checkIn, ch
           {/* Heart */}
           <button
             onClick={toggleWishlist}
-            className="absolute top-3 right-3 p-1.5 transition-transform hover:scale-110"
+            className="absolute top-3 right-3 p-2.5 transition-transform hover:scale-110"
             aria-label="Save to wishlist"
           >
             <Heart

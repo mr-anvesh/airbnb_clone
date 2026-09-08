@@ -286,7 +286,7 @@ export default function Header() {
 
                 {showNotifications && (
                   <div
-                    className="absolute right-0 top-full mt-2 w-80 bg-white dark:bg-[#1e1e1e] border border-[#dddddd] dark:border-[#3d3d3d] rounded-[16px] z-50 overflow-hidden"
+                    className="fixed left-2 right-2 top-[72px] sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-80 bg-white dark:bg-[#1e1e1e] border border-[#dddddd] dark:border-[#3d3d3d] rounded-[16px] z-50 overflow-hidden"
                     style={{ boxShadow: 'rgba(0,0,0,0.12) 0 2px 20px' }}
                   >
                     {/* Header */}

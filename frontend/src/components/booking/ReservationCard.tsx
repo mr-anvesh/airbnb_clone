@@ -131,8 +131,7 @@ export default function ReservationCard({
         {/* Calendar dropdown */}
         {showCalendar && (
           <div
-            className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+6px)] bg-white dark:bg-[#1e1e1e] border border-[#dddddd] dark:border-[#3d3d3d] rounded-[20px] p-4 z-50 shadow-xl"
-            style={{ width: '520px', maxWidth: '95vw' }}
+            className="absolute left-0 right-0 top-[calc(100%+6px)] bg-white dark:bg-[#1e1e1e] border border-[#dddddd] dark:border-[#3d3d3d] rounded-[20px] p-4 z-50 shadow-xl sm:left-1/2 sm:right-auto sm:-translate-x-1/2 sm:w-[520px]"
           >
             <DateRangePicker
               checkIn={checkIn}

@@ -96,7 +96,7 @@ function HostingContent() {
 
   return (
     <main className="max-w-[1280px] mx-auto px-6 py-10">
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-[28px] font-bold text-ink">Host dashboard</h1>
           <p className="text-muted text-sm mt-1">Welcome back, {currentUser?.name}</p>
@@ -214,7 +214,7 @@ function HostingContent() {
                       href={`/hosting/listings/${listing.id}/edit`}
                       className="flex items-center gap-1.5 text-sm text-ink border border-hairline rounded-[8px] px-3 py-2 hover:bg-surface-soft transition-colors"
                     >
-                      <Edit3 size={14} /> Edit
+                      <Edit3 size={14} /> <span className="hidden sm:inline">Edit</span>
                     </Link>
                     <button
                       onClick={() => handleDelete(listing.id)}
@@ -222,7 +222,7 @@ function HostingContent() {
                       className="flex items-center gap-1.5 text-sm text-primary-error border border-hairline rounded-[8px] px-3 py-2 hover:bg-surface-soft transition-colors disabled:opacity-50"
                     >
                       <Trash2 size={14} />
-                      {deleting === listing.id ? '...' : 'Delete'}
+                      <span className="hidden sm:inline">{deleting === listing.id ? '...' : 'Delete'}</span>
                     </button>
                   </div>
                 </div>
@@ -245,7 +245,7 @@ function HostingContent() {
                 <div
                   key={b.id}
                   ref={el => { bookingRowRefs.current[b.id] = el; }}
-                  className={`flex items-center justify-between border rounded-[14px] p-4 transition-all duration-500 ${
+                  className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2 border rounded-[14px] p-4 transition-all duration-500 ${
                     isHighlighted
                       ? 'border-primary bg-primary/5 shadow-md ring-2 ring-primary/30'
                       : 'border-hairline hover:shadow-sm'

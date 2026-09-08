@@ -101,8 +101,8 @@ export default function DateRangePicker({ checkIn, checkOut, onChange }: Props) 
           : `${format(ciDate, 'MMM d')} – ${format(coDate!, 'MMM d, yyyy')}`}
       </p>
 
-      {/* Two-month grid */}
-      <div className="flex gap-6">
+      {/* Two-month grid — one month on mobile, two on sm+ */}
+      <div className="flex flex-col sm:flex-row gap-6">
         {[leftMonth, rightMonth].map((monthStart, idx) => {
           const monthEnd = endOfMonth(monthStart);
           const calStart = startOfWeek(monthStart, { weekStartsOn: 0 });
@@ -110,7 +110,7 @@ export default function DateRangePicker({ checkIn, checkOut, onChange }: Props) 
           const days = eachDayOfInterval({ start: calStart, end: calEnd });
 
           return (
-            <div key={idx} className="flex-1 min-w-0">
+            <div key={idx} className={`flex-1 min-w-0 ${idx === 1 ? 'hidden sm:block' : ''}`}>
               {/* Month nav */}
               <div className="flex items-center justify-between mb-3">
                 {idx === 0 ? (
@@ -122,14 +122,16 @@ export default function DateRangePicker({ checkIn, checkOut, onChange }: Props) 
                   </button>
                 ) : <div className="w-7" />}
 
+
                 <span className="text-sm font-semibold text-[#222222] dark:text-[#f2f2f2]">
                   {format(monthStart, 'MMMM yyyy')}
                 </span>
 
-                {idx === 1 ? (
+                {/* Always show next on left month (mobile has no right month) */}
+                {(idx === 1 || idx === 0) ? (
                   <button
                     onClick={nextMonth}
-                    className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-[#f2f2f2] dark:hover:bg-[#2c2c2c] transition-colors text-[#222222] dark:text-[#f2f2f2]"
+                    className={`w-7 h-7 flex items-center justify-center rounded-full hover:bg-[#f2f2f2] dark:hover:bg-[#2c2c2c] transition-colors text-[#222222] dark:text-[#f2f2f2] ${idx === 0 ? 'sm:hidden' : ''}`}
                   >
                     <ChevronRight size={16} />
                   </button>

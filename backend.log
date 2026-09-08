@@ -1,80 +1,267 @@
 INFO:     Will watch for changes in these directories: ['/Users/anveshmishra/Developer/SCALER/backend']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [58368] using WatchFiles
-INFO:     Started server process [58370]
+INFO:     Started reloader process [56089] using WatchFiles
+INFO:     Started server process [56097]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
+INFO:     127.0.0.1:61420 - "OPTIONS /api/v1/notifications HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61421 - "OPTIONS /api/v1/listings?page=1&page_size=20 HTTP/1.1" 200 OK
 INFO:app.core.rate_limiter:Rate limiter: Redis connected, Lua script loaded (sha=3ef72539)
-INFO:app.core.middleware:method=GET path=/api/v1/host/bookings status=200 duration=0.172s request_id=7c0e2aaa-f43e-480b-9ead-5ac0fcde80c3
-INFO:     127.0.0.1:62532 - "GET /api/v1/host/bookings HTTP/1.1" 200 OK
-INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.039s request_id=955c0977-1a7c-45c6-b422-9ec40ed9be78
-INFO:     127.0.0.1:62534 - "GET /api/v1/notifications HTTP/1.1" 200 OK
-INFO:app.core.middleware:method=GET path=/api/v1/host/bookings status=200 duration=0.005s request_id=a757ad7b-cdea-4c2f-89d1-a8ea75052a78
-INFO:     127.0.0.1:62532 - "GET /api/v1/host/bookings HTTP/1.1" 200 OK
-INFO:app.core.middleware:method=GET path=/api/v1/host/listings status=200 duration=0.613s request_id=5a9928ce-5e49-49ea-aa60-03d61538dbbe
-INFO:     127.0.0.1:62530 - "GET /api/v1/host/listings HTTP/1.1" 200 OK
-INFO:app.core.middleware:method=GET path=/uploads/66e1b889166c44fe9ebb6310b80cb018.jpg status=304 duration=0.009s request_id=cfe9e0b6-e110-46be-84cf-b92ffed2b280
-INFO:     127.0.0.1:62540 - "GET /uploads/66e1b889166c44fe9ebb6310b80cb018.jpg HTTP/1.1" 304 Not Modified
-INFO:app.core.middleware:method=GET path=/api/v1/host/listings status=200 duration=0.038s request_id=c839c2a1-087b-48ad-8c90-6450bce10a96
-INFO:     127.0.0.1:62532 - "GET /api/v1/host/listings HTTP/1.1" 200 OK
-INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.010s request_id=e9eceda3-b4c8-45ab-903b-76f34245a032
-INFO:     127.0.0.1:62545 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
-INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.361s request_id=a0aa8e70-5213-4273-bc4d-ddaf6efba4e7
-INFO:     127.0.0.1:62538 - "GET /api/v1/listings?page=1&page_size=20 HTTP/1.1" 200 OK
-INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.123s request_id=56a91481-4c4d-4a95-a72c-cc2bf1dfa681
-INFO:     127.0.0.1:62545 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
-INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.008s request_id=860b44b2-dbf9-4165-b09f-cd8c358c5e7b
-INFO:     127.0.0.1:62547 - "GET /api/v1/notifications HTTP/1.1" 200 OK
-INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.004s request_id=92293845-226c-46a2-a9a2-ae20661ba03f
-INFO:     127.0.0.1:62545 - "GET /api/v1/notifications HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62545 - "OPTIONS /api/v1/listings?page=2&page_size=20 HTTP/1.1" 200 OK
-INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.068s request_id=50bd6935-885f-42e7-af0d-871e873ed1ac
-INFO:     127.0.0.1:62545 - "GET /api/v1/listings?page=2&page_size=20 HTTP/1.1" 200 OK
-WARNING:  WatchFiles detected changes in 'app/config.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [58370]
-INFO:     Started server process [85975]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/config.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [85975]
-INFO:     Started server process [86150]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/auth/service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [86150]
-INFO:     Started server process [11352]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/database/connection.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [11352]
-INFO:     Started server process [14830]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/database/connection.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [14830]
-INFO:     Started server process [15709]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [15709]
-INFO:     Started server process [25680]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
+INFO:     127.0.0.1:61422 - "OPTIONS /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.323s request_id=f83b28f0-060f-4654-9baa-19c984d22973
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.047s request_id=15deb549-ab13-4b35-8215-60418780b6c3
+INFO:     127.0.0.1:61420 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61422 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.403s request_id=2f50215d-66aa-4141-8dc3-b178215eda96
+INFO:     127.0.0.1:61421 - "GET /api/v1/listings?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61476 - "OPTIONS /api/v1/listings?page=1&page_size=20&check_in=2026-09-09&check_out=2026-09-11&guests=1 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.088s request_id=8cfa2374-9d1a-4c7e-9f6d-208aead163f3
+INFO:     127.0.0.1:61476 - "GET /api/v1/listings?page=1&page_size=20&check_in=2026-09-09&check_out=2026-09-11&guests=1 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.036s request_id=98127cf3-1a9a-477d-9b80-cb08d129aea8
+INFO:     127.0.0.1:61476 - "GET /api/v1/listings?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/3 status=200 duration=0.201s request_id=05f46429-86c8-42eb-9251-66230625ccce
+INFO:     127.0.0.1:61535 - "GET /api/v1/listings/3 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.003s request_id=5cb02543-5a1b-4a92-805f-26ba89e6c51b
+INFO:     127.0.0.1:61544 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/3/reviews status=200 duration=0.377s request_id=e0f09608-9f05-4a46-b9ad-caf5e12da085
+INFO:     127.0.0.1:61537 - "GET /api/v1/listings/3/reviews HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.005s request_id=9b206751-0073-4aec-84af-096ca0e7a454
+INFO:     127.0.0.1:61544 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.009s request_id=973d0b70-8da2-46c4-a96b-43ed5b4f278d
+INFO:     127.0.0.1:61603 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.267s request_id=c14a8eb2-e2f8-4692-bdf3-c8480fbd1096
+INFO:     127.0.0.1:61553 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.403s request_id=608b1bb5-6c61-4e68-b856-7943c8ff7a50
+INFO:     127.0.0.1:61602 - "GET /api/v1/listings?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.134s request_id=f1383309-3a84-487f-b713-0f73b45426c4
+INFO:     127.0.0.1:61605 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.006s request_id=7f924efa-cfd4-4f46-9a41-fc1fe9e47673
+INFO:     127.0.0.1:61603 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.130s request_id=c598b8e4-6b40-4140-a8a7-c7ea1c102021
+INFO:     127.0.0.1:61603 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/1/reviews status=200 duration=0.133s request_id=a0370520-6f73-4f28-82b7-ff3a69b5719a
+INFO:     127.0.0.1:61619 - "GET /api/v1/listings/1/reviews HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/1 status=200 duration=0.383s request_id=911c5278-1484-4e10-b82b-285f6082e82b
+INFO:     127.0.0.1:61617 - "GET /api/v1/listings/1 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.005s request_id=b6a473c7-efa2-419d-873d-dd06d6809fa9
+INFO:     127.0.0.1:61605 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61910 - "OPTIONS /api/v1/listings/1/availability?check_in=2026-09-09&check_out=2026-09-10 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/1/availability status=200 duration=0.012s request_id=594d112e-b80b-4fd5-9441-bb33dec72b70
+INFO:     127.0.0.1:61910 - "GET /api/v1/listings/1/availability?check_in=2026-09-09&check_out=2026-09-10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61956 - "OPTIONS /api/v1/listings/1/availability?check_in=2026-10-15&check_out=2026-10-17 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/1/availability status=200 duration=0.007s request_id=8e784a01-7f8f-4c35-83a1-970a7200cf92
+INFO:     127.0.0.1:61956 - "GET /api/v1/listings/1/availability?check_in=2026-10-15&check_out=2026-10-17 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61965 - "OPTIONS /api/v1/listings/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61968 - "OPTIONS /api/v1/listings/1 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/1/availability status=200 duration=0.134s request_id=679d91a4-d0ea-4ec6-9752-1d280a41094e
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.262s request_id=f47b4eed-1dfc-4f61-a61a-60fcb4d6cab4
+INFO:     127.0.0.1:61966 - "GET /api/v1/listings/1/availability?check_in=2026-10-15&check_out=2026-10-17 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61956 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/1 status=200 duration=0.265s request_id=3b3e270a-59f6-4eb2-adaf-1a83a5755bfb
+INFO:     127.0.0.1:61965 - "GET /api/v1/listings/1 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/1/availability status=200 duration=0.263s request_id=9d2cfb37-5d48-48e3-bd26-d2c983972cff
+INFO:     127.0.0.1:61968 - "GET /api/v1/listings/1/availability?check_in=2026-10-15&check_out=2026-10-17 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.138s request_id=847c0562-0f41-4868-b44f-3ed83dc058e2
+INFO:     127.0.0.1:61966 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/1 status=200 duration=0.037s request_id=ded7c003-13d1-477a-86d4-105fd10dbc09
+INFO:     127.0.0.1:61956 - "GET /api/v1/listings/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61956 - "OPTIONS /api/v1/bookings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=POST path=/api/v1/bookings status=400 duration=0.008s request_id=fc1c23c9-f036-482a-8ddb-ce9f778913ae
+INFO:     127.0.0.1:61956 - "POST /api/v1/bookings HTTP/1.1" 400 Bad Request
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.002s request_id=c37fba99-aa5b-45d2-a1c6-4d7985de8aba
+INFO:     127.0.0.1:62015 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/1/reviews status=200 duration=0.256s request_id=b806f34b-553b-4caa-8f75-ac7822d627a7
+INFO:     127.0.0.1:62013 - "GET /api/v1/listings/1/reviews HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/1 status=200 duration=0.382s request_id=02f26385-c088-4acb-abe2-a495d7b4ae4a
+INFO:     127.0.0.1:62012 - "GET /api/v1/listings/1 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.006s request_id=6af87dde-8447-4880-abde-c54a7915965d
+INFO:     127.0.0.1:62015 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.008s request_id=3c543116-3b76-4399-886e-d3457a17f9b4
+INFO:     127.0.0.1:62023 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.262s request_id=e2590ec2-180a-4479-91e7-0b5b239ef8be
+INFO:     127.0.0.1:62015 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.394s request_id=bc65f6ec-72d4-4212-90ef-e231444f9a8c
+INFO:     127.0.0.1:62017 - "GET /api/v1/listings?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.136s request_id=c148b5b9-bd62-4c41-8932-c1bcc55f09e6
+INFO:     127.0.0.1:62023 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.008s request_id=c737e7a1-4775-42aa-9ae2-3ce624e6cdbe
+INFO:     127.0.0.1:62029 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62117 - "OPTIONS /api/v1/me/bookings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62119 - "OPTIONS /api/v1/me/bookings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.136s request_id=2da7442f-8f1e-4364-b617-27ee019025b7
+INFO:     127.0.0.1:62031 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/me/bookings status=200 duration=0.005s request_id=5019aaa1-3737-415b-ac4b-5785021d8194
+INFO:     127.0.0.1:62117 - "GET /api/v1/me/bookings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/me/bookings status=200 duration=0.005s request_id=69059dd9-f545-4a6f-bb51-dbd22ac75f34
+INFO:     127.0.0.1:62031 - "GET /api/v1/me/bookings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.130s request_id=66b3aef6-ebd5-47ec-9c27-676647f6dadc
+INFO:     127.0.0.1:62119 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.003s request_id=561248be-b76c-4d30-9a84-112268d92976
+INFO:     127.0.0.1:62119 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.131s request_id=749fb0a2-8ef4-4964-a963-95c12164d167
+INFO:     127.0.0.1:62031 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.137s request_id=a920b95e-f4e0-4e08-baa6-9ff5b4c7d724
+INFO:     127.0.0.1:62117 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.007s request_id=adb9681c-cc66-4f99-9b01-7069f54301a1
+INFO:     127.0.0.1:62119 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62117 - "OPTIONS /api/v1/host/listings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62031 - "OPTIONS /api/v1/host/bookings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62142 - "OPTIONS /api/v1/host/listings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62143 - "OPTIONS /api/v1/host/bookings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.265s request_id=f0a6e7bc-6e87-4607-90c5-b5a710f9decf
+INFO:     127.0.0.1:62119 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/host/bookings status=200 duration=0.014s request_id=aaee23a7-2115-4bc5-b32c-bca3c72e7628
+INFO:     127.0.0.1:62117 - "GET /api/v1/host/bookings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/host/listings status=200 duration=0.401s request_id=49c6be08-ea4d-462f-8c19-3d4992817683
+INFO:     127.0.0.1:62031 - "GET /api/v1/host/listings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/host/bookings status=200 duration=0.140s request_id=5df9e635-a5f9-4f7e-b85f-e2a71ec7e188
+INFO:     127.0.0.1:62119 - "GET /api/v1/host/bookings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.276s request_id=52a3138d-29d2-49e1-8269-fdb1a7f665f2
+INFO:     127.0.0.1:62143 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/uploads/66e1b889166c44fe9ebb6310b80cb018.jpg status=304 duration=0.011s request_id=b545fffc-0360-4d82-a862-2e5c6b19b707
+INFO:     127.0.0.1:62149 - "GET /uploads/66e1b889166c44fe9ebb6310b80cb018.jpg HTTP/1.1" 304 Not Modified
+INFO:app.core.middleware:method=GET path=/api/v1/host/listings status=200 duration=0.043s request_id=d3e25ce1-e30a-465f-8d17-9f744772f458
+INFO:     127.0.0.1:62117 - "GET /api/v1/host/listings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62259 - "OPTIONS /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=POST path=/api/v1/auth/login status=200 duration=0.223s request_id=90bce3d5-0aa9-4736-873b-75d48fcbe0e0
+INFO:     127.0.0.1:62259 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.001s request_id=874d473f-4e1c-49c5-9d74-4004e2814e85
+INFO:     127.0.0.1:62259 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.004s request_id=3f394948-1536-4c53-abe1-8e7a6982961e
+INFO:     127.0.0.1:62444 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.259s request_id=5a3b5f74-49f3-4a14-b25a-56848c68ed71
+INFO:     127.0.0.1:62440 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.390s request_id=6e5c7605-683c-48c3-8cb5-4127a4dae9fa
+INFO:     127.0.0.1:62443 - "GET /api/v1/listings?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.135s request_id=bacc92c4-cb21-4d3d-9e15-7eb95df1330a
+INFO:     127.0.0.1:62446 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.006s request_id=4090c021-3dc0-478b-a2bb-50981ccf545b
+INFO:     127.0.0.1:62448 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62448 - "OPTIONS /api/v1/listings?page=1&page_size=20&property_type=CABIN HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.119s request_id=ddaf0673-6203-422b-88f3-e2f34c55065c
+INFO:     127.0.0.1:62448 - "GET /api/v1/listings?page=1&page_size=20&property_type=CABIN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62448 - "OPTIONS /api/v1/listings?page=1&page_size=20&property_type=VILLA HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.069s request_id=9aa967ea-940a-407d-8b2b-b67452c45ff9
+INFO:     127.0.0.1:62448 - "GET /api/v1/listings?page=1&page_size=20&property_type=VILLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62448 - "OPTIONS /api/v1/listings?page=1&page_size=20&property_type=APARTMENT HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.069s request_id=504a7a00-1be3-4993-9d2e-06fa97479a13
+INFO:     127.0.0.1:62448 - "GET /api/v1/listings?page=1&page_size=20&property_type=APARTMENT HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.037s request_id=17444fc1-a0bf-4f03-a9a5-5c807170a446
+INFO:     127.0.0.1:62448 - "GET /api/v1/listings?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.002s request_id=f18a7889-e985-4a41-9baa-da178d213f07
+INFO:     127.0.0.1:62599 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/1/reviews status=200 duration=0.253s request_id=223d22b7-f8b6-42f7-b11c-50851ad8e319
+INFO:     127.0.0.1:62595 - "GET /api/v1/listings/1/reviews HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings/1 status=200 duration=0.380s request_id=3e58ce6d-3a3e-4ea4-9738-7d89abc9569a
+INFO:     127.0.0.1:62594 - "GET /api/v1/listings/1 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.005s request_id=f4ac377f-6ff8-450f-925c-f4143d771ff3
+INFO:     127.0.0.1:62599 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.006s request_id=50eb1494-1dfd-49a3-867c-768bec702d76
+INFO:     127.0.0.1:62677 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.152s request_id=78e7dc53-c355-46ee-a919-51e03b835fcf
+INFO:     127.0.0.1:62601 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.130s request_id=41ec9c91-b3fb-41fc-828a-8a294f418564
+INFO:     127.0.0.1:62677 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.005s request_id=c61554c4-54ca-4f9a-90a9-9f39c8f8af2b
+INFO:     127.0.0.1:62679 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.132s request_id=c54368b9-2101-449a-a634-448e86059c6a
+INFO:     127.0.0.1:62679 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/me/bookings status=200 duration=0.135s request_id=4690d997-12fe-460a-99fd-bbc7eeb8f0fb
+INFO:     127.0.0.1:62677 - "GET /api/v1/me/bookings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.160s request_id=832aecb0-f611-4f73-acfe-5dc24219f422
+INFO:     127.0.0.1:62601 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/me/bookings status=200 duration=0.008s request_id=de305f23-45b5-4054-9747-1214d34f6092
+INFO:     127.0.0.1:62679 - "GET /api/v1/me/bookings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62679 - "OPTIONS /api/v1/bookings/15/cancel HTTP/1.1" 200 OK
+INFO:pika.adapters.utils.connection_workflow:Pika version 1.4.4 connecting to ('::1', 5672, 0, 0)
+ERROR:pika.adapters.utils.io_services_utils:Socket failed to connect: <socket.socket fd=34, family=30, type=1, proto=6, laddr=('::1', 62707, 0, 0)>; error=61 (Connection refused)
+ERROR:pika.adapters.utils.connection_workflow:TCP Connection attempt failed: ConnectionRefusedError(61, 'Connection refused'); dest=(<AddressFamily.AF_INET6: 30>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+ERROR:pika.adapters.utils.connection_workflow:AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(61, 'Connection refused')
+INFO:pika.adapters.utils.connection_workflow:Pika version 1.4.4 connecting to ('127.0.0.1', 5672)
+ERROR:pika.adapters.utils.io_services_utils:Socket failed to connect: <socket.socket fd=34, family=2, type=1, proto=6, laddr=('127.0.0.1', 62708)>; error=61 (Connection refused)
+ERROR:pika.adapters.utils.connection_workflow:TCP Connection attempt failed: ConnectionRefusedError(61, 'Connection refused'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+ERROR:pika.adapters.utils.connection_workflow:AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(61, 'Connection refused')
+ERROR:pika.adapters.utils.connection_workflow:AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(61, 'Connection refused'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(61, 'Connection refused').
+ERROR:pika.adapters.utils.connection_workflow:AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(61, 'Connection refused'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(61, 'Connection refused')
+ERROR:pika.adapters.blocking_connection:Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(61, 'Connection refused'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(61, 'Connection refused')
+ERROR:pika.adapters.blocking_connection:Error in _create_connection().
+Traceback (most recent call last):
+  File "/Users/anveshmishra/Developer/SCALER/backend/.venv/lib/python3.14/site-packages/pika/adapters/blocking_connection.py", line 478, in _create_connection
+    raise self._reap_last_connection_workflow_error(error)
+pika.exceptions.AMQPConnectionError
+WARNING:app.messaging.publisher:RabbitMQ connection failed: 
+WARNING:app.messaging.publisher:RabbitMQ unavailable, skipping event: EventType.BOOKING_CANCELLED
+INFO:app.core.middleware:method=POST path=/api/v1/bookings/15/cancel status=200 duration=0.033s request_id=361e2beb-5b84-4ade-ac7f-a079ad49228c
+INFO:     127.0.0.1:62679 - "POST /api/v1/bookings/15/cancel HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.005s request_id=a36cc412-782c-463a-8af6-25f7cb80ce7c
+INFO:     127.0.0.1:62725 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.260s request_id=a9126f66-03f6-4e77-93f2-f0a60ab67d20
+INFO:     127.0.0.1:62679 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.387s request_id=98f22259-1c7f-4408-a7c0-8bc8039ed91f
+INFO:     127.0.0.1:62724 - "GET /api/v1/listings?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.132s request_id=c34168ca-8722-4f46-885e-718df646c1cd
+INFO:     127.0.0.1:62725 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.005s request_id=31518928-82bc-42b2-ae4c-cca339815017
+INFO:     127.0.0.1:62731 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62733 - "OPTIONS /api/v1/listings?page=2&page_size=20 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.033s request_id=5b108293-c8f5-4fc6-8024-ed2f5733e3c4
+INFO:     127.0.0.1:62733 - "GET /api/v1/listings?page=2&page_size=20 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=POST path=/api/v1/auth/login status=200 duration=0.230s request_id=fadcf13a-8fe8-400a-9f75-4c8eafcb3bb8
+INFO:     127.0.0.1:62830 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.002s request_id=6e545bef-57f9-4931-8d33-b3531a0fc4a5
+INFO:     127.0.0.1:62830 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.133s request_id=69ee009d-7026-4934-a00f-9ed5ce81397d
+INFO:     127.0.0.1:62841 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.007s request_id=5152ecf1-ce7c-45d6-ba80-7a8d9dfe3c1d
+INFO:     127.0.0.1:62843 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.393s request_id=36440b8a-1b0c-444b-9d2c-9a1a22789aac
+INFO:     127.0.0.1:62830 - "GET /api/v1/listings?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.005s request_id=6048580d-2e18-4d52-b5cf-6f01a128a05b
+INFO:     127.0.0.1:62841 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62845 - "OPTIONS /api/v1/notifications/6/read HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=POST path=/api/v1/notifications/6/read status=200 duration=0.010s request_id=d918f11d-fd9a-4d12-b518-f5b2b411d921
+INFO:     127.0.0.1:62845 - "POST /api/v1/notifications/6/read HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.261s request_id=66db562c-b6dc-4bd3-8314-32847f01470c
+INFO:     127.0.0.1:62845 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/host/bookings status=200 duration=0.137s request_id=61f89dfd-18fd-4b3f-a756-79782dd461bc
+INFO:     127.0.0.1:62886 - "GET /api/v1/host/bookings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/host/listings status=200 duration=0.394s request_id=e964db26-1339-4c9c-a780-6102184373e1
+INFO:     127.0.0.1:62885 - "GET /api/v1/host/listings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.263s request_id=b27a5e42-efc5-4c73-964a-f6dc66cfdbd7
+INFO:     127.0.0.1:62845 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/host/bookings status=200 duration=0.136s request_id=2d8768f4-bb0d-4e5f-802f-4d8b965053f9
+INFO:     127.0.0.1:62888 - "GET /api/v1/host/bookings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/host/listings status=200 duration=0.038s request_id=756a95ca-c51d-4baa-b691-90b6a3c74c93
+INFO:     127.0.0.1:62886 - "GET /api/v1/host/listings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.005s request_id=2ae00b85-8409-4d55-aeae-7d7e887b9792
+INFO:     127.0.0.1:62919 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.256s request_id=345b0723-1df5-4536-9f04-facd41b784b3
+INFO:     127.0.0.1:62917 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.260s request_id=23562ad2-2a17-41dc-ab98-5e96bde2d4f6
+INFO:     127.0.0.1:62918 - "GET /api/v1/listings?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.133s request_id=a10075ff-661a-4799-bb29-28b61106948d
+INFO:     127.0.0.1:62919 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.006s request_id=61b0349b-d0cc-48b8-95d7-7f919cba8531
+INFO:     127.0.0.1:62925 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.260s request_id=eec34058-51f7-4f6d-9c87-9d4e04161a3b
+INFO:     127.0.0.1:62947 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/host/bookings status=200 duration=0.007s request_id=5000c184-8029-41c7-a632-c29c99ae491f
+INFO:     127.0.0.1:62952 - "GET /api/v1/host/bookings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/host/listings status=200 duration=0.390s request_id=ec438a55-e7ce-4fc8-9d49-d8b134413430
+INFO:     127.0.0.1:62951 - "GET /api/v1/host/listings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/host/bookings status=200 duration=0.132s request_id=f7f52c35-17eb-42cc-8abe-8fd7a9b2d240
+INFO:     127.0.0.1:62954 - "GET /api/v1/host/bookings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.259s request_id=5213786e-59f4-4f8f-b5a2-deff6a4be4d0
+INFO:     127.0.0.1:62947 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/host/listings status=200 duration=0.035s request_id=a7d59450-7287-4b07-aaa2-8a483ad26345
+INFO:     127.0.0.1:62952 - "GET /api/v1/host/listings HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.005s request_id=121d4ebd-18d9-4f06-8b34-2ef49c63f8c1
+INFO:     127.0.0.1:63010 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.259s request_id=a5fdf523-6e11-49d9-8ead-d192bc8fa6ef
+INFO:     127.0.0.1:62956 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.394s request_id=41654ac0-2c66-455f-8e27-b28357a490ac
+INFO:     127.0.0.1:63009 - "GET /api/v1/listings?page=1&page_size=20 HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/wishlist status=200 duration=0.134s request_id=b1115866-1c24-400d-9d7c-bdd29672f042
+INFO:     127.0.0.1:63012 - "GET /api/v1/wishlist HTTP/1.1" 200 OK
+INFO:app.core.middleware:method=GET path=/api/v1/notifications status=200 duration=0.007s request_id=44dc419b-0c05-4cc5-98b5-f1eebd72a240
+INFO:     127.0.0.1:63014 - "GET /api/v1/notifications HTTP/1.1" 200 OK

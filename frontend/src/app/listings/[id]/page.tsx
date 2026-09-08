@@ -1,8 +1,10 @@
 import { Suspense } from 'react';
-import Link from 'next/link';
+import Link from 'next/link'; // used for back link
 import { ArrowLeft, Star, Home } from 'lucide-react';
 import Header from '@/components/navigation/Header';
 import ReservationCard from '@/components/booking/ReservationCard';
+import MobileReserveDrawer from '@/components/booking/MobileReserveDrawer';
+import MobileImageCarousel from '@/components/listing/MobileImageCarousel';
 import DynamicMap from '@/components/map/DynamicMap';
 import type { Review } from '@/types';
 import { API_URL } from '@/lib/constants';
@@ -77,7 +79,7 @@ export default async function ListingDetailPage({
     <div className="min-h-screen bg-canvas">
       <Suspense><Header /></Suspense>
 
-      <main className="max-w-[1280px] mx-auto px-6 py-6">
+      <main className="max-w-[1280px] mx-auto px-4 sm:px-6 py-6 pb-28 lg:pb-6">
         {/* Back */}
         <Link href="/" className="inline-flex items-center gap-2 text-sm text-ink hover:underline mb-4">
           <ArrowLeft size={16} /> Back to listings
@@ -98,20 +100,28 @@ export default async function ListingDetailPage({
           <span className="underline text-ink cursor-pointer">{listing.location}</span>
         </div>
 
-        {/* Photo grid */}
-        <div className="grid grid-cols-4 grid-rows-2 gap-2 h-[420px] rounded-[12px] overflow-hidden mb-8">
-          <div className="col-span-2 row-span-2">
-            <img src={mainImg} alt={listing.title} className="w-full h-full object-cover" />
+        {/* Photos — swipeable carousel on mobile, 4-col grid on md+ */}
+        <div className="mb-8">
+          <div className="md:hidden">
+            <MobileImageCarousel
+              images={[mainImg, ...gridImgs]}
+              title={listing.title}
+            />
           </div>
-          {gridImgs.map((img, i) => (
-            <div key={i} className="overflow-hidden">
-              <img src={img} alt="" className="w-full h-full object-cover" />
+          <div className="hidden md:grid grid-cols-4 grid-rows-2 gap-2 h-[420px] rounded-[12px] overflow-hidden">
+            <div className="col-span-2 row-span-2 overflow-hidden">
+              <img src={mainImg} alt={listing.title} className="w-full h-full object-cover" />
             </div>
-          ))}
+            {gridImgs.map((img, i) => (
+              <div key={i} className="overflow-hidden">
+                <img src={img} alt="" className="w-full h-full object-cover" />
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Body: 2-col layout */}
-        <div className="flex gap-12">
+        {/* Body: stacks on mobile, side-by-side on lg+ */}
+        <div className="flex flex-col lg:flex-row gap-12">
           {/* Left col */}
           <div className="flex-1 min-w-0">
             {/* Host + meta */}
@@ -229,21 +239,17 @@ export default async function ListingDetailPage({
           </div>
         </div>
 
-        {/* Mobile reserve bar */}
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-canvas border-t border-hairline px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <span className="text-base font-semibold text-ink">${listing.price_per_night.toFixed(0)}</span>
-              <span className="text-muted text-sm"> night</span>
-            </div>
-            <Link
-              href={`/booking/confirm?listing_id=${listing.id}`}
-              className="bg-primary text-white font-semibold rounded-[8px] px-6 py-3 text-sm hover:bg-primary-active transition-colors"
-            >
-              Reserve
-            </Link>
-          </div>
-        </div>
+        {/* Mobile reserve drawer — full ReservationCard in a bottom sheet */}
+        <MobileReserveDrawer
+          listingId={listing.id}
+          pricePerNight={listing.price_per_night}
+          rating={listing.rating}
+          reviewCount={listing.review_count}
+          maxGuests={listing.max_guests}
+          initialCheckIn={sp.check_in || ''}
+          initialCheckOut={sp.check_out || ''}
+          initialGuests={Number(sp.guests) || 1}
+        />
       </main>
     </div>
   );
