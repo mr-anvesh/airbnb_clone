@@ -11,3 +11,37 @@
 2026-09-08 06:05:53,740  INFO      __main__  Host 2 notified of new booking #12
 2026-09-08 06:07:55,192  INFO      __main__  Host 1 notified of new booking #13
 2026-09-08 06:09:25,163  INFO      __main__  Host 1 notified of new booking #14
+2026-09-08 08:25:21,219  ERROR     pika.adapters.utils.io_services_utils  Socket EOF; <socket.socket fd=8, family=30, type=1, proto=6, laddr=('::1', 61378, 0, 0), raddr=('::1', 5672, 0, 0)>
+2026-09-08 08:25:21,220  ERROR     pika.adapters.base_connection  Transport indicated EOF.
+2026-09-08 08:25:21,220  INFO      pika.adapters.utils.io_services_utils  protocol.eof_received() elected to close: <socket.socket fd=8, family=30, type=1, proto=6, laddr=('::1', 61378, 0, 0), raddr=('::1', 5672, 0, 0)>
+2026-09-08 08:25:21,220  INFO      pika.adapters.utils.io_services_utils  _AsyncTransportBase._initate_abort(): Initiating abrupt asynchronous transport shutdown: state=1; error=None; <socket.socket fd=8, family=30, type=1, proto=6, laddr=('::1', 61378, 0, 0), raddr=('::1', 5672, 0, 0)>
+2026-09-08 08:25:21,220  INFO      pika.adapters.utils.io_services_utils  Deactivating transport: state=1; <socket.socket fd=8, family=30, type=1, proto=6, laddr=('::1', 61378, 0, 0), raddr=('::1', 5672, 0, 0)>
+2026-09-08 08:25:21,221  ERROR     pika.adapters.base_connection  connection_lost: StreamLostError: ('Transport indicated EOF',)
+2026-09-08 08:25:21,221  INFO      pika.connection  AMQP stack terminated, failed to connect, or aborted: opened=True, error-arg=StreamLostError: ('Transport indicated EOF',); pending-error=None
+2026-09-08 08:25:21,222  INFO      pika.connection  Stack terminated due to StreamLostError: ('Transport indicated EOF',)
+2026-09-08 08:25:21,222  INFO      pika.adapters.utils.io_services_utils  Closing transport socket and unlinking: state=3; <socket.socket fd=8, family=30, type=1, proto=6, laddr=('::1', 61378, 0, 0), raddr=('::1', 5672, 0, 0)>
+2026-09-08 08:25:21,222  ERROR     pika.adapters.blocking_connection  Unexpected connection close detected: StreamLostError: ('Transport indicated EOF',)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/anveshmishra/Developer/SCALER/backend/workers/notification_worker.py", line 129, in <module>
+    main()
+    ~~~~^^
+  File "/Users/anveshmishra/Developer/SCALER/backend/workers/notification_worker.py", line 125, in main
+    consumer.consume(handle_event)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/anveshmishra/Developer/SCALER/backend/app/messaging/consumer.py", line 67, in consume
+    self._channel.start_consuming()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/anveshmishra/Developer/SCALER/backend/.venv/lib/python3.14/site-packages/pika/adapters/blocking_connection.py", line 1979, in start_consuming
+    self._process_data_events(time_limit=None)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/anveshmishra/Developer/SCALER/backend/.venv/lib/python3.14/site-packages/pika/adapters/blocking_connection.py", line 2147, in _process_data_events
+    self.connection.process_data_events(time_limit=time_limit)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/anveshmishra/Developer/SCALER/backend/.venv/lib/python3.14/site-packages/pika/adapters/blocking_connection.py", line 897, in process_data_events
+    self._flush_output(common_terminator)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/anveshmishra/Developer/SCALER/backend/.venv/lib/python3.14/site-packages/pika/adapters/blocking_connection.py", line 551, in _flush_output
+    raise self._closed_result.value.error
+pika.exceptions.StreamLostError: Transport indicated EOF
