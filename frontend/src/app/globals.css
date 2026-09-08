@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Enable class-based dark mode for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #ff385c;
+  --color-primary-active: #e00b41;
+  --color-primary-disabled: #ffd1da;
+  --color-primary-error: #c13515;
+  --color-ink: #222222;
+  --color-body-text: #3f3f3f;
+  --color-muted: #6a6a6a;
+  --color-muted-soft: #929292;
+  --color-hairline: #dddddd;
+  --color-hairline-soft: #ebebeb;
+  --color-border-strong: #c1c1c1;
+  --color-canvas: #ffffff;
+  --color-surface-soft: #f7f7f7;
+  --color-surface-strong: #f2f2f2;
+  --font-sans: 'Inter', -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+  --shadow-card: rgba(0,0,0,0.02) 0 0 0 1px, rgba(0,0,0,0.04) 0 2px 6px 0, rgba(0,0,0,0.1) 0 4px 8px 0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: 'Inter', -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Dark mode: override CSS custom properties so semantic classes adapt automatically */
+html.dark {
+  color-scheme: dark;
+  --color-canvas: #161616;
+  --color-surface-soft: #222222;
+  --color-surface-strong: #2c2c2c;
+  --color-ink: #f2f2f2;
+  --color-body-text: #d4d4d4;
+  --color-muted: #a8a8a8;
+  --color-muted-soft: #6e6e6e;
+  --color-hairline: #3d3d3d;
+  --color-hairline-soft: #2d2d2d;
+  --color-border-strong: #595959;
+  --shadow-card: rgba(0,0,0,0.5) 0 0 0 1px, rgba(0,0,0,0.35) 0 2px 8px 0, rgba(0,0,0,0.5) 0 4px 12px 0;
+}
+html.dark body {
+  background-color: #161616;
+  color: #f2f2f2;
+}
+
+/* Card hover elevation in dark mode */
+html.dark .group:hover .rounded-\[14px\] {
+  filter: brightness(1.05);
+}
+
+/* Ensure links inherit color */
+a { color: inherit; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-hairline); border-radius: 9999px; }
+
+/* Leaflet map fix */
+.leaflet-container { z-index: 0; }
+html.dark .leaflet-tile {
+  filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(0.9);
+}
+html.dark .leaflet-container { background: #1a1a1a; }
+
+/* Date input calendar icon invert in dark mode */
+html.dark input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/* Hide scrollbar for category strip */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }

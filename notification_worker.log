@@ -1,0 +1,13 @@
+2026-09-08 05:35:25,327  INFO      pika.adapters.utils.connection_workflow  Pika version 1.4.4 connecting to ('::1', 5672, 0, 0)
+2026-09-08 05:35:25,327  INFO      pika.adapters.utils.io_services_utils  Socket connected: <socket.socket fd=8, family=30, type=1, proto=6, laddr=('::1', 61378, 0, 0), raddr=('::1', 5672, 0, 0)>
+2026-09-08 05:35:25,327  INFO      pika.adapters.utils.connection_workflow  Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x109e9b380>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x109e9b380> params=<URLParameters host=localhost port=5672 virtual_host=/ ssl=False>>).
+2026-09-08 05:35:25,332  INFO      pika.adapters.utils.connection_workflow  AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x109e9b380> params=<URLParameters host=localhost port=5672 virtual_host=/ ssl=False>>
+2026-09-08 05:35:25,332  INFO      pika.adapters.utils.connection_workflow  AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x109e9b380> params=<URLParameters host=localhost port=5672 virtual_host=/ ssl=False>>
+2026-09-08 05:35:25,332  INFO      pika.adapters.blocking_connection  Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x109e9b380> params=<URLParameters host=localhost port=5672 virtual_host=/ ssl=False>>
+2026-09-08 05:35:25,332  INFO      pika.adapters.blocking_connection  Created channel=1
+2026-09-08 05:35:25,344  INFO      __main__  Notification worker started — listening on queue 'notification.q'
+2026-09-08 05:35:25,345  INFO      app.messaging.consumer  Consumer started on queue: notification.q
+2026-09-08 05:37:21,924  INFO      __main__  Host 1 notified of new booking #11
+2026-09-08 06:05:53,740  INFO      __main__  Host 2 notified of new booking #12
+2026-09-08 06:07:55,192  INFO      __main__  Host 1 notified of new booking #13
+2026-09-08 06:09:25,163  INFO      __main__  Host 1 notified of new booking #14
