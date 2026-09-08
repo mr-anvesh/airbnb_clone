@@ -11,9 +11,11 @@ A functional clone of the Airbnb web application built as an SDE Full-Stack assi
 3. [Database Schema](#database-schema)
 4. [API Overview](#api-overview)
 5. [Setup Instructions](#setup-instructions)
-6. [Demo Credentials](#demo-credentials)
-7. [Key Features](#key-features)
-8. [Assumptions & Design Decisions](#assumptions--design-decisions)
+6. [Docker Compose](#docker-compose-full-stack)
+7. [Additional Documentation](#additional-documentation)
+8. [Demo Credentials](#demo-credentials)
+9. [Key Features](#key-features)
+10. [Assumptions & Design Decisions](#assumptions--design-decisions)
 
 ---
 
@@ -48,9 +50,10 @@ A functional clone of the Airbnb web application built as an SDE Full-Stack assi
 ### Infrastructure
 | Service | Purpose |
 |---|---|
-| Redis (Upstash) | API response cache + token-bucket rate limiter |
-| RabbitMQ (Docker) | BOOKING_CREATED / BOOKING_CANCELLED / REVIEW_CREATED events |
+| Redis (local or hosted) | API response cache + token-bucket rate limiter |
+| RabbitMQ | BOOKING_CREATED / BOOKING_CANCELLED / REVIEW_CREATED events |
 | SQLite | Primary datastore (file: `backend/data/airbnb.db`) |
+| Nginx | Load balancer in front of three FastAPI replicas (Docker only) |
 
 ---
 
@@ -297,8 +300,7 @@ All endpoints are prefixed with `/api/v1`. Protected routes require `Authorizati
 
 - Python 3.11+ with `venv`
 - Node.js 18+
-- Docker (for RabbitMQ)
-- A Redis instance (local or hosted — see below)
+- Docker (for RabbitMQ / Redis, or full Docker Compose setup)
 
 ### 1. Clone the repository
 
@@ -306,6 +308,19 @@ All endpoints are prefixed with `/api/v1`. Protected routes require `Authorizati
 git clone <your-repo-url>
 cd SCALER
 ```
+
+### Quickstart (recommended)
+
+The `start.sh` script handles venv creation, dependency installation, database seeding, and launching all three processes:
+
+```bash
+./start.sh        # start backend + frontend + notification worker
+./start.sh stop   # stop all processes
+```
+
+Logs are written to `backend.log`, `frontend.log`, and `notification_worker.log` in the project root.
+
+**Optional:** Start Redis and RabbitMQ via Docker first (see steps 3–4) for full caching and notifications. Both are fail-open — the app works without them.
 
 ### 2. Backend setup
 
@@ -339,12 +354,10 @@ docker run -d \
   --name rabbitmq \
   -p 5672:5672 \
   -p 15672:15672 \
-  -e RABBITMQ_DEFAULT_USER=admin \
-  -e RABBITMQ_DEFAULT_PASS=password \
-  rabbitmq:4-management
+  rabbitmq:3-management-alpine
 ```
 
-RabbitMQ management UI: http://localhost:15672 (admin / password)
+RabbitMQ management UI: http://localhost:15672 (guest / guest)
 
 ### 4. Start Redis (optional — if not using hosted)
 
@@ -397,6 +410,33 @@ npm run dev
 ```
 
 Frontend available at: http://localhost:3000
+
+---
+
+## Docker Compose (Full Stack)
+
+Runs the complete production-like topology: Nginx load balancer, three FastAPI replicas, notification worker, Redis, and RabbitMQ. The frontend container is also included.
+
+```bash
+# Build and start everything
+DOCKER_USERNAME=yourusername docker compose up --build
+
+# Seed the database (first run only)
+docker compose exec api-1 python -m app.database.seed
+```
+
+Access:
+- App: http://localhost:80 (via Nginx)
+- API docs: http://localhost:80/docs
+- RabbitMQ UI: http://localhost:15672 (guest / guest)
+
+---
+
+## Additional Documentation
+
+- [System Design](docs/system-design.md) — architecture, middleware stack, caching, RabbitMQ flow, SQLite strategy
+- [API Reference](docs/api.md) — all endpoints, request/response schemas, error codes
+- [Database ERD & Schema](docs/database-erd.md) — table definitions, indexes, seed data
 
 ---
 
