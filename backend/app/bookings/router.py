@@ -20,16 +20,6 @@ def create_booking(
     return service.create_booking(user_id, data)
 
 
-@router.get("/{booking_id}", response_model=BookingResponse)
-def get_booking(
-    booking_id: int,
-    user_id: int = Depends(get_current_user_id),
-    db: Session = Depends(get_db),
-):
-    service = BookingService(db)
-    return service.get_booking(booking_id)
-
-
 @router.post(
     "/{booking_id}/cancel", response_model=BookingResponse
 )

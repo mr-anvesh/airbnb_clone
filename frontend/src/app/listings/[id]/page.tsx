@@ -16,7 +16,8 @@ const PLACEHOLDER_IMAGES = [
 
 async function getListing(id: string) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/listings/${id}`, {
+    const apiUrl = process.env.INTERNAL_API_URL || 'http://nginx';
+    const res = await fetch(`${apiUrl}/api/v1/listings/${id}`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) return null;
@@ -28,7 +29,8 @@ async function getListing(id: string) {
 
 async function getReviews(id: string): Promise<Review[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/listings/${id}/reviews`, {
+    const apiUrl = process.env.INTERNAL_API_URL || 'http://nginx';
+    const res = await fetch(`${apiUrl}/api/v1/listings/${id}/reviews`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) return [];

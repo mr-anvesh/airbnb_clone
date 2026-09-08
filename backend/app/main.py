@@ -22,7 +22,6 @@ from app.reviews.models import Review
 from app.reviews.router import router as reviews_router
 from app.upload.router import UPLOAD_DIR, router as upload_router
 from app.users.models import User
-from app.users.router import router as users_router
 from app.wishlist.models import Wishlist
 from app.wishlist.router import router as wishlist_router
 
@@ -58,7 +57,6 @@ app.add_middleware(
 )
 
 app.include_router(auth_router, prefix=settings.API_V1_PREFIX)
-app.include_router(users_router, prefix=settings.API_V1_PREFIX)
 app.include_router(listings_router, prefix=settings.API_V1_PREFIX)
 app.include_router(listings_host_router, prefix=settings.API_V1_PREFIX)
 app.include_router(bookings_router, prefix=settings.API_V1_PREFIX)

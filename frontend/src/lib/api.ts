@@ -101,10 +101,6 @@ export async function uploadImage(file: File): Promise<string> {
   return url.startsWith('/') ? `${API_URL}${url}` : url;
 }
 
-export async function getUser(id: number): Promise<User> {
-  return apiFetch<User>(`/api/v1/users/${id}`);
-}
-
 export async function getListings(params: SearchParams = {}): Promise<ListingsResponse> {
   const query = new URLSearchParams();
   Object.entries(params).forEach(([k, v]) => {
@@ -164,10 +160,6 @@ export async function createBooking(data: {
     method: 'POST',
     body: JSON.stringify(data),
   }, true);
-}
-
-export async function getBooking(id: number): Promise<BookingResponse> {
-  return apiFetch<BookingResponse>(`/api/v1/bookings/${id}`, {}, true);
 }
 
 export async function cancelBooking(id: number): Promise<BookingResponse> {
