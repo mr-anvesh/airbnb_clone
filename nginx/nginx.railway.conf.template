@@ -1,0 +1,55 @@
+events {
+    worker_connections 1024;
+}
+
+http {
+    upstream api_servers {
+        server api.railway.internal:8000;
+    }
+
+    server {
+        listen ${PORT};
+
+        location /api/ {
+            # Handle preflight at nginx — never forwarded to the backend
+            if ($request_method = OPTIONS) {
+                add_header 'Access-Control-Allow-Origin'  '*';
+                add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, PATCH, OPTIONS';
+                add_header 'Access-Control-Allow-Headers' 'Authorization, Content-Type, Accept, X-Requested-With';
+                add_header 'Access-Control-Max-Age'       86400;
+                add_header 'Content-Length'               0;
+                return 204;
+            }
+
+            # For real requests: hide the backend's CORS headers then re-add once
+            # to prevent duplicate Access-Control-Allow-Origin headers
+            proxy_hide_header 'Access-Control-Allow-Origin';
+            proxy_hide_header 'Access-Control-Allow-Methods';
+            proxy_hide_header 'Access-Control-Allow-Headers';
+            add_header 'Access-Control-Allow-Origin'  '*' always;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, PATCH, OPTIONS' always;
+            add_header 'Access-Control-Allow-Headers' 'Authorization, Content-Type, Accept' always;
+
+            proxy_pass http://api_servers;
+            proxy_set_header Host              $host;
+            proxy_set_header X-Real-IP         $remote_addr;
+            proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_connect_timeout 5s;
+            proxy_read_timeout    30s;
+        }
+
+        location /health {
+            proxy_pass http://api_servers;
+            proxy_set_header Host $host;
+        }
+
+        location /docs {
+            proxy_pass http://api_servers;
+        }
+
+        location /openapi.json {
+            proxy_pass http://api_servers;
+        }
+    }
+}

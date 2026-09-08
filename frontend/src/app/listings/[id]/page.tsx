@@ -5,6 +5,7 @@ import Header from '@/components/navigation/Header';
 import ReservationCard from '@/components/booking/ReservationCard';
 import DynamicMap from '@/components/map/DynamicMap';
 import type { Review } from '@/types';
+import { API_URL } from '@/lib/constants';
 
 const PLACEHOLDER_IMAGES = [
   'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80',
@@ -16,7 +17,7 @@ const PLACEHOLDER_IMAGES = [
 
 async function getListing(id: string) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/listings/${id}`, {
+    const res = await fetch(`${API_URL}/api/v1/listings/${id}`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) return null;
@@ -28,7 +29,7 @@ async function getListing(id: string) {
 
 async function getReviews(id: string): Promise<Review[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/listings/${id}/reviews`, {
+    const res = await fetch(`${API_URL}/api/v1/listings/${id}/reviews`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) return [];
