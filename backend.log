@@ -30,3 +30,19 @@ INFO:     127.0.0.1:62545 - "GET /api/v1/notifications HTTP/1.1" 200 OK
 INFO:     127.0.0.1:62545 - "OPTIONS /api/v1/listings?page=2&page_size=20 HTTP/1.1" 200 OK
 INFO:app.core.middleware:method=GET path=/api/v1/listings status=200 duration=0.068s request_id=50bd6935-885f-42e7-af0d-871e873ed1ac
 INFO:     127.0.0.1:62545 - "GET /api/v1/listings?page=2&page_size=20 HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/config.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [58370]
+INFO:     Started server process [85975]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/config.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [85975]
+INFO:     Started server process [86150]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.

@@ -1,8 +1,4 @@
-// SSR (server-side): use internal Docker hostname; browser: use public URL or relative path
-export const API_URL =
-  typeof window === 'undefined'
-    ? (process.env.INTERNAL_API_URL || 'http://nginx')
-    : (process.env.NEXT_PUBLIC_API_URL || '');
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 export const PROPERTY_TYPES = [
   'APARTMENT',
