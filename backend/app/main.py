@@ -9,6 +9,8 @@ from fastapi.staticfiles import StaticFiles
 from app.auth.router import router as auth_router
 from app.bookings.models import Booking
 from app.bookings.router import host_booking_router, me_router, router as bookings_router
+from app.chat.models import Conversation, Message
+from app.chat.router import router as chat_router
 from app.config import settings
 from app.core.middleware import RateLimitMiddleware, RequestIDMiddleware
 from app.database.base import Base
@@ -27,7 +29,7 @@ from app.wishlist.router import router as wishlist_router
 
 logging.basicConfig(level=logging.INFO)
 
-_models = [User, Listing, ListingImage, Amenity, Booking, Review, Wishlist, Notification]
+_models = [User, Listing, ListingImage, Amenity, Booking, Review, Wishlist, Notification, Conversation, Message]
 
 
 @asynccontextmanager
@@ -65,6 +67,7 @@ app.include_router(host_booking_router, prefix=settings.API_V1_PREFIX)
 app.include_router(reviews_router, prefix=settings.API_V1_PREFIX)
 app.include_router(wishlist_router, prefix=settings.API_V1_PREFIX)
 app.include_router(notifications_router, prefix=settings.API_V1_PREFIX)
+app.include_router(chat_router, prefix=settings.API_V1_PREFIX)
 app.include_router(upload_router, prefix=settings.API_V1_PREFIX)
 
 app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")

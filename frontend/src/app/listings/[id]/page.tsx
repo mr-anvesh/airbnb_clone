@@ -6,6 +6,7 @@ import ReservationCard from '@/components/booking/ReservationCard';
 import MobileReserveDrawer from '@/components/booking/MobileReserveDrawer';
 import MobileImageCarousel from '@/components/listing/MobileImageCarousel';
 import DynamicMap from '@/components/map/DynamicMap';
+import ContactHostButton from '@/components/chat/ContactHostButton';
 import type { Review } from '@/types';
 import { API_URL } from '@/lib/constants';
 
@@ -133,6 +134,7 @@ export default async function ListingDetailPage({
                 <p className="text-muted text-sm mt-1">
                   {listing.max_guests} guests · {listing.bedrooms} bedroom{listing.bedrooms !== 1 ? 's' : ''} · {listing.beds} bed{listing.beds !== 1 ? 's' : ''} · {listing.bathrooms} bath{listing.bathrooms !== 1 ? 's' : ''}
                 </p>
+                <ContactHostButton listingId={listing.id} hostId={listing.host_id} />
               </div>
               <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-white font-semibold text-lg overflow-hidden shrink-0">
                 {listing.host?.avatar_url ? (

@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Search, Bell, Menu, User, Sun, Moon } from 'lucide-react';
+import { Search, Bell, Menu, User, Sun, Moon, MessageCircle } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -390,6 +390,13 @@ export default function Header() {
                       </div>
                       <div className="px-2 py-1">
                         <Link href="/trips" className="block px-2 py-2 text-sm text-ink hover:bg-surface-soft rounded-lg transition-colors" onClick={() => setShowUserMenu(false)}>My trips</Link>
+                        <button
+                          className="w-full text-left flex items-center gap-2 px-2 py-2 text-sm text-ink hover:bg-surface-soft rounded-lg transition-colors"
+                          onClick={() => { setShowUserMenu(false); window.dispatchEvent(new CustomEvent('open-chat')); }}
+                        >
+                          <MessageCircle size={15} />
+                          Messages
+                        </button>
                         <Link href="/wishlist" className="block px-2 py-2 text-sm text-ink hover:bg-surface-soft rounded-lg transition-colors" onClick={() => setShowUserMenu(false)}>Wishlists</Link>
                         {currentUser.role === 'HOST' && (
                           <Link href="/hosting" className="block px-2 py-2 text-sm text-ink hover:bg-surface-soft rounded-lg transition-colors" onClick={() => setShowUserMenu(false)}>Host dashboard</Link>

@@ -5,6 +5,7 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import { ToastProvider } from '@/contexts/ToastContext';
 import { ToastContainer } from '@/components/ui/Toast';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import ChatBubble from '@/components/chat/ChatBubble';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <AuthProvider>
             <ToastProvider>
               {children}
+              <ChatBubble />
               <ToastContainer />
             </ToastProvider>
           </AuthProvider>

@@ -1,5 +1,6 @@
 import logging
 
+
 import pika
 
 from app.config import settings

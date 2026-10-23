@@ -16,6 +16,8 @@ import type {
   LoginRequest,
   SignupRequest,
   TokenResponse,
+  ConversationResponse,
+  ChatMessage,
 } from '@/types';
 
 function getToken(): string | null {
@@ -220,4 +222,38 @@ export async function markNotificationRead(id: number): Promise<Notification> {
 
 export async function markAllNotificationsRead(): Promise<void> {
   return apiFetch<void>('/api/v1/notifications/read-all', { method: 'POST' }, true);
+}
+
+// Chat
+export async function getConversations(): Promise<ConversationResponse[]> {
+  return apiFetch<ConversationResponse[]>('/api/v1/chat/conversations', {}, true);
+}
+
+export async function createConversation(listingId: number): Promise<ConversationResponse> {
+  return apiFetch<ConversationResponse>('/api/v1/chat/conversations', {
+    method: 'POST',
+    body: JSON.stringify({ listing_id: listingId }),
+  }, true);
+}
+
+export async function getMessages(conversationId: number): Promise<ChatMessage[]> {
+  return apiFetch<ChatMessage[]>(`/api/v1/chat/conversations/${conversationId}/messages`, {}, true);
+}
+
+export async function sendMessage(conversationId: number, content: string): Promise<ChatMessage> {
+  return apiFetch<ChatMessage>(`/api/v1/chat/conversations/${conversationId}/messages`, {
+    method: 'POST',
+    body: JSON.stringify({ content }),
+  }, true);
+}
+
+export async function markConversationRead(conversationId: number): Promise<void> {
+  return apiFetch<void>(`/api/v1/chat/conversations/${conversationId}/read`, { method: 'POST' }, true);
+}
+
+export function getChatWsUrl(): string {
+  const token = getToken();
+  if (!token) return '';
+  const base = API_URL.replace(/^http/, 'ws');
+  return `${base}/api/v1/chat/ws?token=${token}`;
 }

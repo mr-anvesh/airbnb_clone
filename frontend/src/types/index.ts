@@ -182,6 +182,32 @@ export interface ListingCreate {
 
 export interface ListingUpdate extends Partial<ListingCreate> {}
 
+export interface ConversationResponse {
+  id: number;
+  listing_id: number;
+  guest_id: number;
+  host_id: number;
+  listing_title: string;
+  other_user_name: string;
+  other_user_avatar: string | null;
+  last_message: string | null;
+  last_message_at: string | null;
+  unread_count: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ChatMessage {
+  id: number;
+  conversation_id: number;
+  sender_id: number;
+  sender_name: string;
+  sender_avatar: string | null;
+  content: string;
+  is_read: boolean;
+  created_at: string;
+}
+
 export interface SearchParams {
   location?: string;
   check_in?: string;
