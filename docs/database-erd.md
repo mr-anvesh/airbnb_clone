@@ -1,6 +1,6 @@
 # Database — ERD and Schema Reference
 
-Database: SQLite 3 (WAL mode). ORM: SQLAlchemy 2.0.
+Database: PostgreSQL 16. ORM: SQLAlchemy 2.0 with the psycopg driver.
 
 ---
 
@@ -194,16 +194,9 @@ CREATE INDEX ON wishlists(user_id);
 
 ---
 
-## SQLite PRAGMA Configuration
+## Connection Pooling
 
-Applied on every new connection:
-
-```sql
-PRAGMA journal_mode = WAL;      -- concurrent readers, one writer
-PRAGMA synchronous = NORMAL;    -- durability vs. speed balance
-PRAGMA foreign_keys = ON;       -- enforce FK constraints
-PRAGMA busy_timeout = 5000;     -- wait up to 5s for write lock
-```
+Each FastAPI or worker process connects through SQLAlchemy's PostgreSQL psycopg dialect using a bounded pool of 10 connections. `max_overflow=0` keeps the process at that limit, `pool_pre_ping=True` validates connections before reuse, and `pool_recycle=1800` replaces long-lived connections. With three API replicas and one worker, the deployment can create up to 40 application connections; size the PostgreSQL server's connection limit accordingly.
 
 ---
 

@@ -26,7 +26,7 @@ A functional clone of the Airbnb web application built as an SDE Full-Stack assi
 |---|---|
 | Web framework | FastAPI 0.115 |
 | Language | Python 3.14 |
-| Database | SQLite (via SQLAlchemy 2.0, ORM) |
+| Database | PostgreSQL (via SQLAlchemy 2.0 and psycopg) |
 | Migrations | Alembic |
 | Authentication | JWT (python-jose) + bcrypt password hashing (passlib) |
 | Caching | Redis — response caching for listings, reviews, amenities |
@@ -52,7 +52,7 @@ A functional clone of the Airbnb web application built as an SDE Full-Stack assi
 |---|---|
 | Redis (local or hosted) | API response cache + token-bucket rate limiter |
 | RabbitMQ | BOOKING_CREATED / BOOKING_CANCELLED / REVIEW_CREATED events |
-| SQLite | Primary datastore (file: `backend/data/airbnb.db`) |
+| PostgreSQL | Primary relational datastore, reached through a 10-connection pool per application process |
 | Nginx | Load balancer in front of three FastAPI replicas (Docker only) |
 
 ---
@@ -94,8 +94,8 @@ A functional clone of the Airbnb web application built as an SDE Full-Stack assi
        │                    │
        ▼                    ▼
 ┌─────────────┐    ┌────────────────────────────────────────────┐
-│   SQLite    │    │  Redis                                     │
-│  (SQLAlch.) │    │   • Cache: listing:{id}          10 min   │
+│ PostgreSQL  │    │  Redis                                      │
+│  (psycopg)  │    │   • Cache: listing:{id}          10 min   │
 │             │    │           listings:search:{hash}  5 min   │
 │  9 tables   │    │           amenities:all           1 hour  │
 │  (see below)│    │           reviews:listing:{id}   10 min   │
@@ -318,9 +318,18 @@ The `start.sh` script handles venv creation, dependency installation, database s
 ./start.sh stop   # stop all processes
 ```
 
+For single-instance Ubuntu / EC2 deployments, use `ubuntu-start.sh`:
+
+```bash
+chmod +x ubuntu-start.sh
+./ubuntu-start.sh        # starts 1 backend, 1 frontend, RabbitMQ, worker, Redis, PostgreSQL
+./ubuntu-start.sh status # check container status
+./ubuntu-start.sh stop   # stop services
+```
+
 Logs are written to `backend.log`, `frontend.log`, and `notification_worker.log` in the project root.
 
-**Optional:** Start Redis and RabbitMQ via Docker first (see steps 3–4) for full caching and notifications. Both are fail-open — the app works without them.
+Start PostgreSQL before running the application. Redis and RabbitMQ are optional for local development: their cache and messaging integrations fail open when unavailable.
 
 ### 2. Backend setup
 
@@ -336,7 +345,7 @@ pip install -r requirements.txt
 
 # Create the .env file
 cat > .env << 'EOF'
-DATABASE_URL=sqlite:///./data/airbnb.db
+DATABASE_URL=postgresql+psycopg://airbnb:airbnb@localhost:5432/airbnb
 SECRET_KEY=change-this-to-a-random-32-char-string
 RABBITMQ_URL=amqp://admin:password@localhost:5672/
 REDIS_URL=redis://localhost:6379/0
@@ -347,7 +356,25 @@ EOF
 mkdir -p data/uploads
 ```
 
-### 3. Start RabbitMQ (Docker)
+### 3. Start PostgreSQL (Docker)
+
+```bash
+docker run -d \
+  --name airbnb-postgres \
+  -e POSTGRES_DB=airbnb \
+  -e POSTGRES_USER=airbnb \
+  -e POSTGRES_PASSWORD=airbnb \
+  -p 5432:5432 \
+  postgres:16-alpine
+```
+
+Create the test database when you intend to run the backend tests:
+
+```bash
+docker exec airbnb-postgres createdb -U airbnb airbnb_test
+```
+
+### 4. Start RabbitMQ (Docker)
 
 ```bash
 docker run -d \
@@ -359,7 +386,7 @@ docker run -d \
 
 RabbitMQ management UI: http://localhost:15672 (guest / guest)
 
-### 4. Start Redis (optional — if not using hosted)
+### 5. Start Redis (optional — if not using hosted)
 
 ```bash
 docker run -d --name redis -p 6379:6379 redis:7-alpine
@@ -367,7 +394,7 @@ docker run -d --name redis -p 6379:6379 redis:7-alpine
 
 Or use a hosted Redis (Upstash, Redis Cloud) and update `REDIS_URL` in `.env`.
 
-### 5. Seed the database
+### 6. Seed the database
 
 ```bash
 cd backend
@@ -376,7 +403,7 @@ python -m app.database.seed
 
 This creates 8 demo users, 20 listings across India, 9 bookings, 5 reviews, and 15 amenities.
 
-### 6. Start the backend API
+### 7. Start the backend API
 
 ```bash
 cd backend
@@ -385,7 +412,7 @@ cd backend
 
 API docs available at: http://localhost:8000/docs
 
-### 7. Start the notification worker (separate terminal)
+### 8. Start the notification worker (separate terminal)
 
 ```bash
 cd backend
@@ -394,7 +421,7 @@ cd backend
 
 The worker consumes `BOOKING_CREATED`, `BOOKING_CANCELLED`, and `REVIEW_CREATED` events from RabbitMQ and writes notifications to the database.
 
-### 8. Frontend setup
+### 9. Frontend setup
 
 ```bash
 cd frontend
@@ -415,7 +442,7 @@ Frontend available at: http://localhost:3000
 
 ## Docker Compose (Full Stack)
 
-Runs the complete production-like topology: Nginx load balancer, three FastAPI replicas, notification worker, Redis, and RabbitMQ. The frontend container is also included.
+Runs the complete production-like topology: Nginx load balancer, three FastAPI replicas, notification worker, PostgreSQL, Redis, and RabbitMQ. The frontend container is also included.
 
 ```bash
 # Build and start everything
@@ -434,7 +461,7 @@ Access:
 
 ## Additional Documentation
 
-- [System Design](docs/system-design.md) — architecture, middleware stack, caching, RabbitMQ flow, SQLite strategy
+- [System Design](docs/system-design.md) — architecture, middleware stack, caching, RabbitMQ flow, and PostgreSQL pooling
 - [API Reference](docs/api.md) — all endpoints, request/response schemas, error codes
 - [Database ERD & Schema](docs/database-erd.md) — table definitions, indexes, seed data
 
@@ -526,7 +553,7 @@ Returns `HTTP 429` with `Retry-After` header and JSON error body on violation.
 - **Payments are mocked**: The booking confirmation page shows a demo credit card. No real payment processor is integrated. Confirmation creates the booking immediately.
 
 ### Database
-- **SQLite over PostgreSQL**: SQLite was chosen per the assignment specification. The ORM layer (SQLAlchemy) means migrating to PostgreSQL for production is a single config change.
+- **PostgreSQL with psycopg**: PostgreSQL is the source of truth. SQLAlchemy connects through psycopg with a bounded pool of 10 connections per application process (`max_overflow=0`) and checks connections before reuse.
 - **Denormalised rating on listings**: `rating` and `review_count` are stored directly on the `listings` table and updated on every review write. This avoids an aggregate query on every listing fetch. A background recalculation job would be needed if reviews could be deleted.
 - **Price snapshot in bookings**: `nightly_price` is snapshotted at booking time so historical bookings remain accurate even if the host changes the price later.
 - **Fees are calculated, not configurable**: Cleaning fee (10%) and service fee (12%) are hard-coded in the pricing layer. In a real system these would be configurable per listing or platform-wide.
