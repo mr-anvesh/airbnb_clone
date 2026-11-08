@@ -78,18 +78,8 @@ log "Installing Python dependencies…"
 pip install -q -r requirements.txt
 ok "Python deps ready"
 
-# ── database: clean stale WAL + seed ─────────────────────────────────────────
-mkdir -p "$BACKEND/data"
-
-# Remove stale WAL checkpoint files that cause disk I/O errors
-if [ -f "$BACKEND/data/airbnb.db" ] && [ -f "$BACKEND/data/airbnb.db-shm" ]; then
-  DBSIZE=$(wc -c < "$BACKEND/data/airbnb.db")
-  WALSIZE=$(wc -c < "$BACKEND/data/airbnb.db-wal" 2>/dev/null || echo 0)
-  if [ "$WALSIZE" -eq 0 ] && [ "$DBSIZE" -le 8192 ]; then
-    warn "Stale WAL files detected — removing…"
-    rm -f "$BACKEND/data/airbnb.db-shm" "$BACKEND/data/airbnb.db-wal"
-  fi
-fi
+# ── database: PostgreSQL seed ────────────────────────────────────────────────
+mkdir -p "$BACKEND/data/uploads"
 
 log "Seeding database (skipped if already seeded)…"
 python3 -c "

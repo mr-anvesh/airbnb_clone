@@ -12,7 +12,7 @@ Airbnb clone fullstack assignment at /Users/anveshmishra/Developer/SCALER/.
 **How to apply:** Reference when working on this project. Key paths and decisions below.
 
 ## Backend (/backend)
-- FastAPI + SQLite (at data/airbnb.db), Python venv at .venv/
+- FastAPI + PostgreSQL via psycopg (`postgresql+psycopg://...`), Python venv at .venv/
 - JWT auth via python-jose + passlib[bcrypt]
 - Auth endpoints: POST /api/v1/auth/signup, /auth/login, GET /auth/me
 - Bearer token auth (Authorization: Bearer <token>) — NOT X-User-Id header

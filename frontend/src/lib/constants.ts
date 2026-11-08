@@ -1,4 +1,8 @@
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+export const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  (typeof window !== 'undefined'
+    ? `${window.location.protocol}//${window.location.hostname}:8000`
+    : (process.env.INTERNAL_API_URL || process.env.BACKEND_URL || 'http://localhost:8000'));
 
 export const PROPERTY_TYPES = [
   'APARTMENT',

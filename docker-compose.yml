@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   frontend:
     image: ${DOCKER_USERNAME:-yourusername}/scaler-frontend:latest
@@ -15,13 +13,16 @@ services:
   api-1:
     image: ${DOCKER_USERNAME:-yourusername}/scaler-backend:latest
     build: ./backend
+    ports:
+      - "8000:8000"
     environment:
-      - DATABASE_URL=sqlite:///./data/airbnb.db
+      - DATABASE_URL=postgresql+psycopg://airbnb:airbnb@postgres:5432/airbnb
       - REDIS_URL=redis://redis:6379/0
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
-    volumes:
-      - sqlite_data:/app/data
+      - SECRET_KEY=${SECRET_KEY:-super-secret-key-change-in-production-32chars}
     depends_on:
+      postgres:
+        condition: service_healthy
       redis:
         condition: service_healthy
       rabbitmq:
@@ -31,12 +32,13 @@ services:
     image: ${DOCKER_USERNAME:-yourusername}/scaler-backend:latest
     build: ./backend
     environment:
-      - DATABASE_URL=sqlite:///./data/airbnb.db
+      - DATABASE_URL=postgresql+psycopg://airbnb:airbnb@postgres:5432/airbnb
       - REDIS_URL=redis://redis:6379/0
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
-    volumes:
-      - sqlite_data:/app/data
+      - SECRET_KEY=${SECRET_KEY:-super-secret-key-change-in-production-32chars}
     depends_on:
+      postgres:
+        condition: service_healthy
       redis:
         condition: service_healthy
       rabbitmq:
@@ -46,12 +48,13 @@ services:
     image: ${DOCKER_USERNAME:-yourusername}/scaler-backend:latest
     build: ./backend
     environment:
-      - DATABASE_URL=sqlite:///./data/airbnb.db
+      - DATABASE_URL=postgresql+psycopg://airbnb:airbnb@postgres:5432/airbnb
       - REDIS_URL=redis://redis:6379/0
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
-    volumes:
-      - sqlite_data:/app/data
+      - SECRET_KEY=${SECRET_KEY:-super-secret-key-change-in-production-32chars}
     depends_on:
+      postgres:
+        condition: service_healthy
       redis:
         condition: service_healthy
       rabbitmq:
@@ -62,12 +65,13 @@ services:
     build: ./backend
     command: python -m workers.notification_worker
     environment:
-      - DATABASE_URL=sqlite:///./data/airbnb.db
+      - DATABASE_URL=postgresql+psycopg://airbnb:airbnb@postgres:5432/airbnb
       - REDIS_URL=redis://redis:6379/0
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
-    volumes:
-      - sqlite_data:/app/data
+      - SECRET_KEY=${SECRET_KEY:-super-secret-key-change-in-production-32chars}
     depends_on:
+      postgres:
+        condition: service_healthy
       redis:
         condition: service_healthy
       rabbitmq:
@@ -83,11 +87,28 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
 
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: airbnb
+      POSTGRES_USER: airbnb
+      POSTGRES_PASSWORD: airbnb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airbnb -d airbnb"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
 volumes:
-  sqlite_data:
+  postgres_data:

@@ -1,5 +1,7 @@
+import os
+
 import pytest
-from sqlalchemy import create_engine, event
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.bookings.models import Booking
@@ -10,21 +12,19 @@ from app.reviews.models import Review
 from app.users.models import User, UserRole
 from app.wishlist.models import Wishlist
 
-TEST_DATABASE_URL = "sqlite:///./test.db"
+TEST_DATABASE_URL = os.getenv(
+    "TEST_DATABASE_URL",
+    "postgresql+psycopg://airbnb:airbnb@localhost:5432/airbnb_test",
+)
 
 engine = create_engine(
     TEST_DATABASE_URL,
-    connect_args={"check_same_thread": False},
+    pool_size=10,
+    max_overflow=0,
+    pool_pre_ping=True,
 )
 
 _models = [User, Listing, ListingImage, Amenity, Booking, Review, Wishlist, Notification]
-
-
-@event.listens_for(engine, "connect")
-def configure_sqlite(dbapi_connection, connection_record):
-    cursor = dbapi_connection.cursor()
-    cursor.execute("PRAGMA foreign_keys=ON;")
-    cursor.close()
 
 
 TestingSessionLocal = sessionmaker(

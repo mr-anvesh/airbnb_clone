@@ -2,7 +2,7 @@
 
 ## Overview
 
-The system is a full-stack web application with a Next.js frontend, a FastAPI backend, SQLite as the source of truth, Redis for caching, and RabbitMQ for asynchronous domain events. In production (Docker Compose), three stateless FastAPI replicas sit behind an Nginx load balancer.
+The system is a full-stack web application with a Next.js frontend, a FastAPI backend, PostgreSQL as the source of truth, Redis for caching, and RabbitMQ for asynchronous domain events. In production (Docker Compose), three stateless FastAPI replicas sit behind an Nginx load balancer.
 
 ---
 
@@ -24,15 +24,15 @@ The system is a full-stack web application with a Next.js frontend, a FastAPI ba
           │ api-1    │     │ api-2    │     │ api-3    │
           └────┬─────┘     └────┬─────┘     └────┬─────┘
                │                │                │
-           Pool(4)          Pool(4)           Pool(4)
+          Pool(10)         Pool(10)          Pool(10)
                └────────────────┼────────────────┘
                                 │
                   ┌─────────────┼──────────────┐
                   ▼             ▼              ▼
               ┌────────┐   ┌───────────┐  ┌──────────────┐
-              │ Redis  │   │ RabbitMQ  │  │   SQLite     │
+              │ Redis  │   │ RabbitMQ  │  │ PostgreSQL   │
               │ Cache  │   │  Events   │  │ Source Truth │
-              └────────┘   └─────┬─────┘  │    + WAL     │
+              └────────┘   └─────┬─────┘  │ Source Truth │
                                   │        └──────────────┘
                                   ▼
                          ┌─────────────────┐
@@ -56,7 +56,7 @@ Browser (localhost:3000)
 FastAPI (localhost:8000)
         ├──► Redis       (optional — fail-open)
         ├──► RabbitMQ    (optional — fail-open)
-        └──► SQLite      (data/airbnb.db)
+        └──► PostgreSQL  (localhost:5432)
                               ▲
                               │
               notification_worker.py
@@ -101,7 +101,7 @@ Repository            — SQLAlchemy queries, CRUD, filters, pagination
 SQLAlchemy Model
      │
      ▼
-SQLite (WAL mode)
+PostgreSQL (psycopg)
 ```
 
 ---
@@ -140,7 +140,7 @@ schemas.py     — Pydantic v2 request/response shapes
 
 ### Booking Availability
 
-Availability is enforced **inside a SQLite transaction**:
+Availability is enforced **inside a PostgreSQL transaction**:
 
 ```
 POST /bookings
@@ -237,7 +237,7 @@ FastAPI service (publisher)
     notification_worker.py
         │
         ▼
-    INSERT notification row → SQLite
+    INSERT notification row → PostgreSQL
 ```
 
 Events carry enough context for consumers to act without additional DB lookups:
@@ -255,7 +255,7 @@ Events carry enough context for consumers to act without additional DB lookups:
 
 Worker uses **manual ack** — a message is only acknowledged after the notification row is committed. Dead-letter behaviour relies on RabbitMQ's default requeue-on-nack.
 
-Note: SQLite commit and RabbitMQ publish are **separate operations** — there is no distributed transaction between them. A crash between commit and publish would lose the event. A full outbox pattern would address this for production.
+Note: PostgreSQL commit and RabbitMQ publish are **separate operations** — there is no distributed transaction between them. A crash between commit and publish would lose the event. A full outbox pattern would address this for production.
 
 ---
 
@@ -269,29 +269,20 @@ For production, the local storage path should be replaced with an object storage
 
 ---
 
-## SQLite Configuration
+## PostgreSQL Connection Pooling
 
 ```python
 engine = create_engine(
     DATABASE_URL,
-    pool_size=4,
+    pool_size=10,
     max_overflow=0,
     pool_timeout=10,
     pool_recycle=1800,
-    connect_args={"check_same_thread": False, "timeout": 5},
+    pool_pre_ping=True,
 )
 ```
 
-On every connection:
-
-```sql
-PRAGMA journal_mode = WAL;
-PRAGMA synchronous = NORMAL;
-PRAGMA foreign_keys = ON;
-PRAGMA busy_timeout = 5000;
-```
-
-**SQLite write serialization caveat:** Multiple FastAPI replicas share the same SQLite file. Concurrent reads scale; concurrent writes are serialized by SQLite. The architecture mitigates this by keeping write transactions short, using WAL mode, and offloading non-critical work to RabbitMQ. For heavy write loads, migrating to PostgreSQL is a single SQLAlchemy connection string change.
+SQLAlchemy uses the `postgresql+psycopg` dialect. Every FastAPI and worker process has a bounded pool of 10 connections (`max_overflow=0`); `pool_pre_ping=True` removes stale connections before use and `pool_recycle=1800` refreshes long-lived connections. The three API replicas plus worker can therefore use up to 40 PostgreSQL connections in total.
 
 ---
 
@@ -347,5 +338,6 @@ Maps use React-Leaflet + OpenStreetMap tiles (no API key required). In dark mode
 | `worker` | scaler-backend | Notification worker process |
 | `redis` | redis:7-alpine | Cache + rate limiter |
 | `rabbitmq` | rabbitmq:3-management-alpine | Message broker |
+| `postgres` | postgres:16-alpine | Primary relational datastore |
 
-All API replicas and the worker share a single `sqlite_data` Docker volume. Nginx load balancing across replicas is configured separately via `nginx/nginx.conf`.
+PostgreSQL persists its data in the `postgres_data` Docker volume. Nginx load balancing across API replicas is configured separately via `nginx/nginx.conf`.

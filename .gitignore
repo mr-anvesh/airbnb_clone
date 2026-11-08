@@ -13,3 +13,7 @@ node_modules/
 .DS_Store
 data/
 .pytest_cache/
+backend.log
+frontend.log
+notification_worker.log
+.pids
