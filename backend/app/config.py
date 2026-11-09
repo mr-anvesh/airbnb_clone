@@ -3,6 +3,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     DATABASE_URL: str = "postgresql+psycopg://airbnb:airbnb@localhost:5432/airbnb"
+    DB_POOL_SIZE: int = 2  # Total pool = 6 across 3 replicas (2 per replica)
     REDIS_URL: str = "redis://localhost:6379/0"
     RABBITMQ_URL: str = "amqp://guest:guest@localhost:5672/"
     API_V1_PREFIX: str = "/api/v1"
