@@ -9,6 +9,7 @@ COPY . .
 
 RUN mkdir -p data
 
+ENV PORT=8000
 EXPOSE 8000
 
 CMD ["supervisord", "-c", "/app/supervisord.conf"]
