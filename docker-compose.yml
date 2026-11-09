@@ -28,41 +28,8 @@ services:
       rabbitmq:
         condition: service_healthy
 
-  api-2:
-    image: ${DOCKER_USERNAME:-yourusername}/scaler-backend:latest
-    build: ./backend
-    environment:
-      - DATABASE_URL=postgresql+psycopg://airbnb:airbnb@postgres:5432/airbnb
-      - REDIS_URL=redis://redis:6379/0
-      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
-      - SECRET_KEY=${SECRET_KEY:-super-secret-key-change-in-production-32chars}
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-
-  api-3:
-    image: ${DOCKER_USERNAME:-yourusername}/scaler-backend:latest
-    build: ./backend
-    environment:
-      - DATABASE_URL=postgresql+psycopg://airbnb:airbnb@postgres:5432/airbnb
-      - REDIS_URL=redis://redis:6379/0
-      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
-      - SECRET_KEY=${SECRET_KEY:-super-secret-key-change-in-production-32chars}
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-
   worker:
     image: ${DOCKER_USERNAME:-yourusername}/scaler-backend:latest
-    build: ./backend
     command: python -m workers.notification_worker
     environment:
       - DATABASE_URL=postgresql+psycopg://airbnb:airbnb@postgres:5432/airbnb
@@ -70,6 +37,8 @@ services:
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
       - SECRET_KEY=${SECRET_KEY:-super-secret-key-change-in-production-32chars}
     depends_on:
+      api-1:
+        condition: service_started
       postgres:
         condition: service_healthy
       redis:
